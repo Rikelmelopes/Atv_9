@@ -7,6 +7,7 @@ import React from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { BsArrowLeftCircleFill, BsCheck2 } from "react-icons/bs";
+import { mask } from "remask";
 
 const form = () => {
   const { push } = useRouter();
@@ -21,6 +22,13 @@ const form = () => {
     push("/professores");
   }
 
+  function handleChange(event) {
+    const name = event.target.name;
+    const value = event.target.value;
+    const mascara = event.target.getAttribute("mask");
+    setValue(name, mask(value, mascara));
+  }
+
   return (
     <Pagina titulo="Professor">
       <Form>
@@ -29,7 +37,9 @@ const form = () => {
             <Form.Label>Nome: </Form.Label>
             <Form.Control
               type="text"
+              mask="999.999.999-99"
               {...register("nome", professorValidator.nome)}
+              onChange={handleChange}
             />
             {errors.nome && (
               <small className="text-danger">{errors.nome.message}</small>
@@ -40,7 +50,9 @@ const form = () => {
             <Form.Label>CPF: </Form.Label>
             <Form.Control
               type="text"
-              {...register("cpf", professorValidator.cpf)}
+              mask="999.999.999-99"
+              {...register("cpf", alunoValidator.cpf)}
+              onChange={handleChange}
             />
             {errors.cpf && (
               <small className="text-danger">{errors.cpf.message}</small>
@@ -88,6 +100,8 @@ const form = () => {
             <Form.Label>Telefone: </Form.Label>
             <Form.Control
               type="tel"
+              mask="(99) 99999-9999"
+              onChange={handleChange}
               {...register("telefone", professorValidator.telefone)}
             />
             {errors.telefone && (

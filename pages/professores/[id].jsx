@@ -43,7 +43,12 @@ const form = () => {
 
         <Form.Group className="mb-3" controlId="cpf">
           <Form.Label>CPF: </Form.Label>
-          <Form.Control type="text" {...register("cpf")} />
+          <Form.Control
+            type="text"
+            mask="999.999.999-99"
+            {...register("cpf", alunoValidator.cpf)}
+            onChange={handleChange}
+          />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="matricula">
@@ -63,7 +68,12 @@ const form = () => {
 
         <Form.Group className="mb-3" controlId="telefone">
           <Form.Label>Telefone: </Form.Label>
-          <Form.Control type="tel" {...register("telefone")} />
+          <Form.Control
+            type="tel"
+            mask="(99) 99999-9999"
+            {...register("telefone", alunoValidator.telefone)}
+            onChange={handleChange}
+          />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="cep">
